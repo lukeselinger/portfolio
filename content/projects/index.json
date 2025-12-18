@@ -1,0 +1,52 @@
+{
+  "projects": [
+    {
+      "slug": "structure-sensor-usability-testing",
+      "title": "Structure Sensor Usability Testing",
+      "category": "UX Research",
+      "year": "2015",
+      "featured": true
+    },
+    {
+      "slug": "building-accessible-forms",
+      "title": "Building Accessible Forms",
+      "category": "Frontend Development",
+      "year": "2015",
+      "featured": true
+    },
+    {
+      "slug": "design-sprint",
+      "title": "Identifying User Needs Through the Design Sprint",
+      "category": "UX Research",
+      "year": "2015",
+      "featured": true
+    },
+    {
+      "slug": "structure-sensor-onboarding",
+      "title": "Structure Sensor Onboarding",
+      "category": "Product Design",
+      "year": "2015",
+      "featured": true
+    },
+    {
+      "slug": "omniplex-blog-redesign",
+      "title": "Omniplex Blog Redesign",
+      "category": "Web Design",
+      "year": "2015",
+      "featured": true
+    },
+    {
+      "slug": "omniplex-illustrations",
+      "title": "Omniplex Illustrations",
+      "category": "Illustration",
+      "year": "2015-2018",
+      "featured": true
+    }
+  ],
+  "_meta": {
+    "source": "https://www.lukeselinger.com/",
+    "extractedAt": "2025-12-18",
+    "totalProjects": 6
+  }
+}
+

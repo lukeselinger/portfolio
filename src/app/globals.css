@@ -1,0 +1,155 @@
+/*
+ * Design Tokens
+ * Based on analysis of paco.me
+ * 
+ * This file establishes the foundational design system:
+ * - Typography scale (restrained: 2 sizes)
+ * - Spacing scale (8px base unit)
+ * - Color palette (grayscale)
+ * - Transition timing
+ */
+
+:root {
+  /* ===================
+     COLOR PALETTE
+     Grayscale with 12 steps (inspired by Radix Colors)
+     =================== */
+  --gray1: #fcfcfc;
+  --gray2: #f8f8f8;
+  --gray3: #f3f3f3;
+  --gray4: #ededed;
+  --gray5: #e8e8e8;
+  --gray6: #e2e2e2;
+  --gray7: #dbdbdb;
+  --gray8: #c7c7c7;
+  --gray9: #8f8f8f;
+  --gray10: #858585;
+  --gray11: #6f6f6f;
+  --gray12: #171717;
+
+  /* Semantic color aliases */
+  --bg: #ffffff;
+  --fg: var(--gray12);
+  --text-color: #3a3a3a;           /* Body text - softer than pure black */
+  --text-secondary: var(--gray11); /* Section labels, muted text */
+  --border-color: var(--gray5);    /* Dividers, borders */
+  --link-underline: var(--gray8);  /* Subtle link underlines */
+
+  /* ===================
+     TYPOGRAPHY
+     Restrained scale: only 2 base sizes
+     =================== */
+  
+  /* Font families */
+  --font-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+                   Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", 
+                   "Helvetica Neue", sans-serif;
+  --font-sans: "Inter", var(--font-fallback);
+  --font-serif: "Newsreader", "Times New Roman", Times, serif;
+
+  /* Type scale */
+  --text-base: 16px;
+  --text-small: 14px;
+
+  /* Line heights */
+  --leading-base: 28px;  /* 1.75 ratio for body */
+  --leading-small: 20px; /* 1.43 ratio for small text */
+
+  /* Font weights */
+  --weight-normal: 400;
+  --weight-medium: 500;
+
+  /* ===================
+     SPACING SCALE
+     8px base unit
+     =================== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-16: 128px;
+
+  /* ===================
+     LAYOUT
+     =================== */
+  --page-width: 1072px;
+  --content-width: 640px;
+  --body-margin: max(24px, env(safe-area-inset-left));
+
+  /* ===================
+     TRANSITIONS
+     =================== */
+  --transition-fast: 100ms;
+  --transition-medium: 160ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/*
+ * CSS Reset & Base Styles
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  color: var(--text-color);
+  background-color: var(--bg);
+}
+
+/*
+ * Typography defaults
+ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--weight-medium);
+}
+
+/* Emphasis uses serif font - this creates the elegant italic style */
+em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: calc(1em + 1px); /* Slightly larger to match x-height */
+}
+
+/*
+ * Link styles
+ * Subtle underline that darkens on hover
+ */
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: text-decoration-color var(--transition-fast) var(--ease-out);
+}
+
+a:hover {
+  text-decoration-color: var(--text-color);
+}
+
+/*
+ * Selection highlight
+ */
+
+::selection {
+  background-color: rgba(0, 0, 0, 0.07);
+}

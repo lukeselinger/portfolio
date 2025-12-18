@@ -1,0 +1,27 @@
+{
+  "name": "Luke Selinger",
+  "title": "Product Designer",
+  "subtitle": "UX/UI Designer",
+  "tagline": "Luke Selinger is a Product Designer with a penchant for product strategy, prototyping, and alliteration",
+  "location": null,
+  "email": null,
+  "social": {
+    "twitter": null,
+    "linkedin": null,
+    "github": null
+  },
+  "navigation": [
+    { "label": "Portfolio", "href": "/" },
+    { "label": "Writing", "href": "/writing" }
+  ],
+  "footer": {
+    "text": "Luke Selinger Design",
+    "year": "2017"
+  },
+  "_meta": {
+    "source": "https://www.lukeselinger.com/",
+    "extractedAt": "2025-12-18",
+    "notes": "Original site built on Squarespace. Some fields like email and social links not publicly visible on homepage."
+  }
+}
+
