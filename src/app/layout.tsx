@@ -1,34 +1,25 @@
 import type { Metadata } from "next";
-import { Inter, Newsreader } from "next/font/google";
+import { Newsreader } from "next/font/google";
 import "./globals.css";
 
 /**
- * Font configuration
+ * Font configuration - adampolselli style
  * 
- * Inter: Primary sans-serif for body text and headings
- * - Variable font for optimal loading
- * - Used for all UI text
- * 
- * Newsreader: Serif font for emphasis/italics only
- * - Creates elegant contrast when text is italicized
- * - Only loads italic weight to minimize bundle size
+ * Newsreader: Primary serif font for all text
+ * - Creates editorial, condensed feel similar to LibreCaslonCondensed
+ * - Loads regular + italic weights
  */
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 const newsreader = Newsreader({
-  variable: "--font-serif",
+  variable: "--font-primary",
   subsets: ["latin"],
-  style: ["italic"],
+  style: ["normal", "italic"],
+  weight: ["400"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio website",
+  title: "Luke Selinger, Product Designer",
+  description: "Product Designer with a penchant for product strategy, prototyping, and alliteration",
 };
 
 export default function RootLayout({
@@ -37,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${newsreader.variable}`}>
+    <html lang="en" className={newsreader.variable}>
       <body>{children}</body>
     </html>
   );

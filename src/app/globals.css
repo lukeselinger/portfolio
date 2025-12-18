@@ -1,155 +1,110 @@
 /*
- * Design Tokens
- * Based on analysis of paco.me
+ * Design Tokens - adampolselli.com style
  * 
- * This file establishes the foundational design system:
- * - Typography scale (restrained: 2 sizes)
- * - Spacing scale (8px base unit)
- * - Color palette (grayscale)
- * - Transition timing
+ * Characteristics:
+ * - Radical minimalism (~50 rules total)
+ * - Grayscale palette (adapted from original yellow)
+ * - Vertically centered layout
+ * - Condensed serif typography
+ * - Single 640px breakpoint
  */
 
 :root {
   /* ===================
-     COLOR PALETTE
-     Grayscale with 12 steps (inspired by Radix Colors)
+     COLORS (Grayscale)
      =================== */
-  --gray1: #fcfcfc;
-  --gray2: #f8f8f8;
-  --gray3: #f3f3f3;
-  --gray4: #ededed;
-  --gray5: #e8e8e8;
-  --gray6: #e2e2e2;
-  --gray7: #dbdbdb;
-  --gray8: #c7c7c7;
-  --gray9: #8f8f8f;
-  --gray10: #858585;
-  --gray11: #6f6f6f;
-  --gray12: #171717;
-
-  /* Semantic color aliases */
-  --bg: #ffffff;
-  --fg: var(--gray12);
-  --text-color: #3a3a3a;           /* Body text - softer than pure black */
-  --text-secondary: var(--gray11); /* Section labels, muted text */
-  --border-color: var(--gray5);    /* Dividers, borders */
-  --link-underline: var(--gray8);  /* Subtle link underlines */
+  --color-bg: #fafafa;
+  --color-text: #000000;
+  --color-link-hover: #0000ff;
 
   /* ===================
      TYPOGRAPHY
-     Restrained scale: only 2 base sizes
      =================== */
+  --font-primary: "Newsreader", "Times New Roman", Times, serif;
   
-  /* Font families */
-  --font-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
-                   Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", 
-                   "Helvetica Neue", sans-serif;
-  --font-sans: "Inter", var(--font-fallback);
-  --font-serif: "Newsreader", "Times New Roman", Times, serif;
-
   /* Type scale */
-  --text-base: 16px;
-  --text-small: 14px;
-
+  --text-intro: 48px;
+  --text-body: 20px;
+  --text-footer: 12px;
+  
   /* Line heights */
-  --leading-base: 28px;  /* 1.75 ratio for body */
-  --leading-small: 20px; /* 1.43 ratio for small text */
+  --line-height-intro: 1.1;
+  --line-height-body: 1.4;
+  --line-height-footer: 1.4;
 
-  /* Font weights */
-  --weight-normal: 400;
-  --weight-medium: 500;
+  /* Letter spacing */
+  --letter-spacing-intro: -0.5px;
 
   /* ===================
-     SPACING SCALE
-     8px base unit
+     SPACING
      =================== */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 48px;
-  --space-8: 64px;
-  --space-16: 128px;
+  --spacing-paragraph: 20px;
+  --spacing-header: 40px;
+  --spacing-mobile-padding: 32px 20px;
 
   /* ===================
      LAYOUT
      =================== */
-  --page-width: 1072px;
-  --content-width: 640px;
-  --body-margin: max(24px, env(safe-area-inset-left));
+  --container-width: 600px;
+  --breakpoint-mobile: 640px;
+}
 
-  /* ===================
-     TRANSITIONS
-     =================== */
-  --transition-fast: 100ms;
-  --transition-medium: 160ms;
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+/* Mobile overrides */
+@media screen and (max-width: 640px) {
+  :root {
+    --text-intro: 36px;
+    --text-body: 18px;
+    --line-height-intro: 1.2;
+    --line-height-footer: 1.6;
+  }
 }
 
 /*
- * CSS Reset & Base Styles
+ * CSS Reset
  */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, 
+blockquote, a, em, img, strong, b, i, ol, ul, li,
+article, aside, footer, header, nav, section {
   margin: 0;
   padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
 }
 
+/*
+ * Base Styles
+ */
 html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-size-adjust: 100%;
+  height: 100%;
 }
 
 body {
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
-  line-height: var(--leading-base);
-  color: var(--text-color);
-  background-color: var(--bg);
+  background: var(--color-bg);
+  box-sizing: border-box;
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+  height: 100%;
+  margin: 0;
 }
 
 /*
- * Typography defaults
+ * Links
  */
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: var(--weight-medium);
-}
-
-/* Emphasis uses serif font - this creates the elegant italic style */
-em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: calc(1em + 1px); /* Slightly larger to match x-height */
-}
-
-/*
- * Link styles
- * Subtle underline that darkens on hover
- */
-
 a {
-  color: inherit;
+  color: var(--color-text);
   text-decoration: underline;
-  text-decoration-color: var(--link-underline);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-  transition: text-decoration-color var(--transition-fast) var(--ease-out);
 }
 
 a:hover {
-  text-decoration-color: var(--text-color);
+  color: var(--color-link-hover);
 }
 
 /*
- * Selection highlight
+ * Selection
  */
-
 ::selection {
-  background-color: rgba(0, 0, 0, 0.07);
+  background-color: rgba(0, 0, 0, 0.1);
 }
