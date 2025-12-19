@@ -1,34 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Newsreader } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
 import "./globals.css";
 
 /**
- * Font configuration
+ * Font configuration - zachjohnston style
  * 
- * Inter: Primary sans-serif for body text and headings
- * - Variable font for optimal loading
- * - Used for all UI text
- * 
- * Newsreader: Serif font for emphasis/italics only
- * - Creates elegant contrast when text is italicized
- * - Only loads italic weight to minimize bundle size
+ * Instrument Sans: Contemporary sans-serif for all text
+ * - Clean, modern feel
+ * - Single weight (400) for simplicity
  */
-const inter = Inter({
-  variable: "--font-sans",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-primary",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const newsreader = Newsreader({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  style: ["italic"],
+  weight: ["400"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio website",
+  title: "Luke Selinger, Product Designer",
+  description: "Product Designer with a penchant for product strategy, prototyping, and alliteration",
 };
 
 export default function RootLayout({
@@ -37,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${newsreader.variable}`}>
+    <html lang="en" className={instrumentSans.variable}>
       <body>{children}</body>
     </html>
   );

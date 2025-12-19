@@ -1,216 +1,129 @@
 /*
- * Page Styles
+ * Page Styles - zachjohnston.com style
  * 
- * This file demonstrates CSS Modules - each class is automatically scoped
- * to this component, preventing style conflicts.
- * 
- * Key patterns from paco.me:
- * - Single column layout with max-width constraint
- * - Generous vertical padding (128px desktop, 64px mobile)
- * - Flexbox for the grid section
- * - Consistent spacing using CSS custom properties
+ * Key techniques:
+ * - Vertical centering with space-between (content + footer)
+ * - Inverted typography hierarchy
+ * - Red accent on name
+ * - Simple flexbox layout
  */
 
 /* ===================
-   PAGE LAYOUT
+   CONTAINER
+   Full height, content centered, footer pinned
    =================== */
-
-.page {
+.container {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.main {
-  flex: 1;
   width: 100%;
-  max-width: var(--page-width);
+  max-width: var(--container-width);
   margin: 0 auto;
-  padding: var(--space-16) var(--body-margin);
-}
-
-.article {
+  padding: var(--spacing-lg);
+  
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  align-items: center;
 }
 
 /* ===================
-   HERO SECTION
-   Name + bio paragraphs
+   MAIN CONTENT
+   Flex: 1 to take available space, centered within
    =================== */
-
-.hero {
+.content {
+  flex: 1;
+  max-width: var(--content-width);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  max-width: var(--content-width);
+  justify-content: center;
+  gap: var(--spacing-lg);
+}
+
+/* ===================
+   HEADER
+   Inverted hierarchy: small name, large title
+   =================== */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
 .name {
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
-  font-weight: var(--weight-medium);
-  line-height: var(--leading-base);
-  color: var(--text-color);
+  font-size: var(--text-name);
+  font-weight: 400;
+  line-height: var(--line-height-name);
+  letter-spacing: var(--letter-spacing-name);
+  color: var(--color-accent);
+}
+
+.title {
+  font-size: var(--text-title);
+  font-weight: 400;
+  line-height: var(--line-height-title);
+  letter-spacing: var(--letter-spacing-title);
+  color: var(--color-text);
 }
 
 /* ===================
-   GRID SECTION
-   Building / Projects / Writing columns
+   BIO
    =================== */
+.bio {
+  max-width: 460px;
+}
 
-.grid {
+/* ===================
+   EXPERIENCE
+   Adapted from logo grid concept
+   =================== */
+.experience {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--space-6);
+  gap: var(--spacing-xl);
+  padding: var(--spacing-sm) 0;
 }
 
-.column {
+.experienceItem {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  min-width: 160px;
-  flex: 1;
+  gap: 2px;
 }
 
-.sectionLabel {
-  font-family: var(--font-sans);
-  font-size: var(--text-small);
-  font-weight: var(--weight-normal);
-  line-height: var(--leading-small);
-  color: var(--text-secondary);
-  margin-bottom: var(--space-2);
+.company {
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--color-text);
 }
 
-.items {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.itemTitle {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-.itemDescription {
-  font-size: var(--text-small);
-  line-height: var(--leading-small);
-  color: var(--text-secondary);
-}
-
-.externalIcon {
-  color: var(--text-secondary);
-  flex-shrink: 0;
-}
-
-/* ===================
-   NOW SECTION
-   Current interests / about
-   =================== */
-
-.now {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  max-width: var(--content-width);
-}
-
-.now .sectionLabel {
-  margin-bottom: 0;
-}
-
-/* ===================
-   CONNECT SECTION
-   Contact information
-   =================== */
-
-.connect {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  max-width: var(--content-width);
-}
-
-.connect .sectionLabel {
-  margin-bottom: 0;
+.role {
+  font-size: 14px;
+  color: var(--color-secondary);
 }
 
 /* ===================
    FOOTER
+   Pinned to bottom via space-between
    =================== */
-
 .footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-4) var(--body-margin);
-  border-top: 1px solid var(--border-color);
-  font-size: var(--text-small);
-  line-height: var(--leading-small);
-  color: var(--text-secondary);
+  flex-direction: row;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-lg);
 }
 
-.footerQuote {
-  /* Inherit styles from footer */
-}
-
-.footerYear {
-  /* Inherit styles from footer */
+.footer a {
+  font-size: var(--text-body);
 }
 
 /* ===================
-   RESPONSIVE DESIGN
-   Mobile-first approach
-   
-   Key breakpoint: ~768px
-   - Reduces vertical padding
-   - Grid naturally wraps due to flex-wrap
+   RESPONSIVE
    =================== */
-
-@media (max-width: 768px) {
-  .main {
-    padding: var(--space-8) var(--body-margin);
+@media (max-width: 520px) {
+  .container {
+    max-width: 100%;
   }
-
-  .article {
-    gap: var(--space-6);
-  }
-
-  .grid {
-    gap: var(--space-5);
-  }
-
-  .column {
-    /* On mobile, columns take more width before wrapping */
-    min-width: 140px;
-  }
-}
-
-/* 
- * Small mobile adjustments
- * Below 480px, further reduce spacing
- */
-@media (max-width: 480px) {
-  .main {
-    padding: var(--space-6) var(--body-margin);
-  }
-
-  .grid {
-    /* Stack columns vertically on very small screens */
+  
+  .experience {
     flex-direction: column;
-    gap: var(--space-5);
-  }
-
-  .column {
-    min-width: 100%;
+    gap: var(--spacing-lg);
   }
 }
