@@ -1,89 +1,126 @@
 /*
- * Design Tokens
- * Based on analysis of paco.me
+ * Design Tokens - daneden.me Clone
  * 
- * This file establishes the foundational design system:
- * - Typography scale (restrained: 2 sizes)
- * - Spacing scale (8px base unit)
- * - Color palette (grayscale)
- * - Transition timing
+ * Key characteristics:
+ * - Mathematical spacing scale using multipliers
+ * - Warm gray palette (hue 32 = orange tint)
+ * - Pink/red accent color (#dd425c) for links
+ * - Tiempos-inspired serif for body, system-ui for headings
+ * - 3-column CSS Grid layout with centered content
+ * - 33rem (~528px) content width
  */
 
 :root {
   /* ===================
-     COLOR PALETTE
-     Grayscale with 12 steps (inspired by Radix Colors)
-     =================== */
-  --gray1: #fcfcfc;
-  --gray2: #f8f8f8;
-  --gray3: #f3f3f3;
-  --gray4: #ededed;
-  --gray5: #e8e8e8;
-  --gray6: #e2e2e2;
-  --gray7: #dbdbdb;
-  --gray8: #c7c7c7;
-  --gray9: #8f8f8f;
-  --gray10: #858585;
-  --gray11: #6f6f6f;
-  --gray12: #171717;
-
-  /* Semantic color aliases */
-  --bg: #ffffff;
-  --fg: var(--gray12);
-  --text-color: #3a3a3a;           /* Body text - softer than pure black */
-  --text-secondary: var(--gray11); /* Section labels, muted text */
-  --border-color: var(--gray5);    /* Dividers, borders */
-  --link-underline: var(--gray8);  /* Subtle link underlines */
-
-  /* ===================
      TYPOGRAPHY
-     Restrained scale: only 2 base sizes
+     Dual typeface system: serif body + sans headings
      =================== */
   
   /* Font families */
-  --font-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
-                   Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", 
-                   "Helvetica Neue", sans-serif;
-  --font-sans: "Inter", var(--font-fallback);
-  --font-serif: "Newsreader", "Times New Roman", Times, serif;
-
-  /* Type scale */
-  --text-base: 16px;
-  --text-small: 14px;
-
+  --font-body: "Source Serif 4", "Georgia", serif;
+  --font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", 
+                  Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-serif: "Source Serif 4", "Georgia", serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", 
+               Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-caption: system-ui, -apple-system, sans-serif;
+  
+  /* Baseline ratio */
+  --baseline: 1.6;
+  
+  /* ===================
+     SIZE SCALE
+     Multipliers for mathematical spacing
+     =================== */
+  --scale-xxs: 0.2;
+  --scale-xs: 0.6;
+  --scale-s: 0.8;
+  --scale-m: 1;
+  --scale-l: 1.25;
+  --scale-xl: 2;
+  --scale-xxl: 3;
+  --scale-xxxl: 4;
+  
+  /* Base font size */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-body: 1.25rem; /* 20px - body text */
+  --font-size-intro: 4.2rem; /* 67.2px - large intro */
+  --font-size-h2: 1.5rem; /* 24px - section headings */
+  --font-size-meta: 0.875rem; /* 14px - meta text */
+  
   /* Line heights */
-  --leading-base: 28px;  /* 1.75 ratio for body */
-  --leading-small: 20px; /* 1.43 ratio for small text */
-
-  /* Font weights */
-  --weight-normal: 400;
-  --weight-medium: 500;
-
+  --leading-tight: 1.2;
+  --leading-base: 1.6;
+  --leading-relaxed: 1.75;
+  
   /* ===================
      SPACING SCALE
-     8px base unit
+     Calculated from size multipliers
      =================== */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 48px;
-  --space-8: 64px;
-  --space-16: 128px;
-
+  --sp-xxs: calc(var(--scale-xxs) * var(--font-size-base)); /* 3.2px */
+  --sp-xs: calc(var(--scale-xs) * var(--font-size-base));   /* 9.6px */
+  --sp-s: calc(var(--scale-s) * var(--font-size-base));     /* 12.8px */
+  --sp-m: calc(var(--scale-m) * var(--font-size-base));     /* 16px */
+  --sp-l: calc(var(--scale-l) * var(--font-size-base));     /* 20px */
+  --sp-xl: calc(var(--scale-xl) * var(--font-size-base));   /* 32px */
+  --sp-xxl: calc(var(--scale-xxl) * var(--font-size-base)); /* 48px */
+  --sp-xxxl: calc(var(--scale-xxxl) * var(--font-size-base)); /* 64px */
+  
+  /* ===================
+     COLOR PALETTE
+     Warm grays using HSL with hue 32 (orange tint)
+     =================== */
+  --gray-hue: 32;
+  --gray-sat: 0.2;
+  
+  /* Gray scale - warm tinted */
+  --gray00: hsl(var(--gray-hue), calc(var(--gray-sat) * 50%), 98%);
+  --gray05: hsl(var(--gray-hue), calc(var(--gray-sat) * 40%), 95%);
+  --gray10: hsl(var(--gray-hue), calc(var(--gray-sat) * 40%), 90%);
+  --gray20: hsl(var(--gray-hue), calc(var(--gray-sat) * 40%), 70%);
+  --gray30: hsl(var(--gray-hue), calc(var(--gray-sat) * 30%), 30%);
+  --gray35: hsl(var(--gray-hue), calc(var(--gray-sat) * 15%), 20%);
+  --gray40: hsl(var(--gray-hue), calc(var(--gray-sat) * 30%), 5%);
+  
+  /* Semantic colors */
+  --site-color: #dd425c;         /* Primary accent (pink/red) */
+  --hover-color: #dd425c;        /* Link hover */
+  --text-color: hsl(32, 6%, 5%); /* Body text - warm near-black */
+  --meta-color: hsl(32, 6%, 30%);/* Secondary text */
+  --highlight-color: #ffc800;    /* Yellow highlight */
+  --mark-color: rgba(255, 200, 0, 0.15); /* Semi-transparent yellow */
+  --code-color: #222;            /* Code text */
+  --wash-color: hsl(32, 10%, 98%); /* Background wash */
+  --code-wash: hsl(32, 8%, 95%); /* Code background */
+  
+  /* Semantic aliases */
+  --bg: var(--wash-color);
+  --fg: var(--text-color);
+  --border-color: var(--gray10);
+  
   /* ===================
      LAYOUT
+     CSS Grid with centered content column
      =================== */
-  --page-width: 1072px;
-  --content-width: 640px;
-  --body-margin: max(24px, env(safe-area-inset-left));
-
+  --content-width: 33rem;        /* ~528px for body text */
+  --content-width-wide: 42rem;   /* ~672px for intro text */
+  --page-width: calc(var(--content-width) + var(--sp-xl) * 2);
+  --page-padding: var(--sp-l);   /* Side padding */
+  --grid-spec: minmax(var(--page-padding), 1fr) minmax(auto, var(--content-width)) minmax(var(--page-padding), 1fr);
+  --grid-spec-wide: minmax(var(--page-padding), 1fr) minmax(auto, var(--content-width-wide)) minmax(var(--page-padding), 1fr);
+  --center-column: 2 / 3;
+  
+  /* ===================
+     BREAKPOINTS
+     =================== */
+  --breakpoint-narrow: 50em;   /* 800px */
+  --breakpoint-medium: 64em;   /* 1024px */
+  
   /* ===================
      TRANSITIONS
      =================== */
   --transition-fast: 100ms;
-  --transition-medium: 160ms;
+  --transition-medium: 200ms;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -103,11 +140,12 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
   line-height: var(--leading-base);
   color: var(--text-color);
   background-color: var(--bg);
@@ -118,32 +156,31 @@ body {
  */
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: var(--weight-medium);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: var(--leading-base);
 }
 
-/* Emphasis uses serif font - this creates the elegant italic style */
-em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: calc(1em + 1px); /* Slightly larger to match x-height */
+p {
+  margin-bottom: 0;
 }
 
 /*
  * Link styles
- * Subtle underline that darkens on hover
+ * Pink/red accent underline for distinction
  */
 
 a {
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: var(--link-underline);
+  text-decoration-color: var(--text-color);
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
   transition: text-decoration-color var(--transition-fast) var(--ease-out);
 }
 
 a:hover {
-  text-decoration-color: var(--text-color);
+  text-decoration-color: var(--site-color);
 }
 
 /*
@@ -151,5 +188,41 @@ a:hover {
  */
 
 ::selection {
-  background-color: rgba(0, 0, 0, 0.07);
+  background-color: var(--mark-color);
+}
+
+/*
+ * Skip to content link (accessibility)
+ */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--sp-l);
+  padding: var(--sp-xs) var(--sp-m);
+  background: var(--text-color);
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-meta);
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: var(--sp-m);
+}
+
+/*
+ * Table reset for timeline
+ */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  text-align: left;
+  vertical-align: top;
 }

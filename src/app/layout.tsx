@@ -1,34 +1,30 @@
 import type { Metadata } from "next";
-import { Inter, Newsreader } from "next/font/google";
+import { Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 
 /**
- * Font configuration
+ * Font configuration - daneden.me clone
  * 
- * Inter: Primary sans-serif for body text and headings
- * - Variable font for optimal loading
- * - Used for all UI text
+ * Source Serif 4: Premium serif for body text
+ * - Modern, readable, elegant
+ * - Similar character to Tiempos (which is not freely available)
+ * - Used for body text to create editorial feel
  * 
- * Newsreader: Serif font for emphasis/italics only
- * - Creates elegant contrast when text is italicized
- * - Only loads italic weight to minimize bundle size
+ * System fonts: For headings and UI
+ * - Native feel, fast loading
+ * - Handled via CSS variables (font-heading)
  */
-const inter = Inter({
-  variable: "--font-sans",
+const sourceSerif = Source_Serif_4({
+  variable: "--font-body",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const newsreader = Newsreader({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  style: ["italic"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio website",
+  title: "Daniel Eden — Product Designer",
+  description: "Product Designer at Meta Reality Labs. Building apps for time, weather, and introspection.",
 };
 
 export default function RootLayout({
@@ -37,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${newsreader.variable}`}>
+    <html lang="en" className={sourceSerif.variable}>
       <body>{children}</body>
     </html>
   );

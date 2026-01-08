@@ -1,216 +1,301 @@
 /*
- * Page Styles
+ * Page Styles - daneden.me Clone
  * 
- * This file demonstrates CSS Modules - each class is automatically scoped
- * to this component, preventing style conflicts.
- * 
- * Key patterns from paco.me:
- * - Single column layout with max-width constraint
- * - Generous vertical padding (128px desktop, 64px mobile)
- * - Flexbox for the grid section
- * - Consistent spacing using CSS custom properties
+ * Key patterns:
+ * - CSS Grid for 3-column centering
+ * - Warm typography with serif body
+ * - Pink/red accent on intro links (3px underline)
+ * - Horizontal scrolling project cards (overflow-x: scroll)
+ * - Clean timeline table
+ * - Mathematical spacing using CSS custom properties
  */
 
 /* ===================
    PAGE LAYOUT
+   3-column grid with centered content
    =================== */
 
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 .main {
-  flex: 1;
-  width: 100%;
-  max-width: var(--page-width);
-  margin: 0 auto;
-  padding: var(--space-16) var(--body-margin);
+  display: grid;
+  grid-template-columns: var(--grid-spec);
+  min-height: 100vh;
+  padding: var(--sp-xxxl) 0;
+  gap: var(--sp-xxl);
 }
 
-.article {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
+.main > * {
+  grid-column: var(--center-column);
+}
+
+/* Intro section uses wider grid for better line length */
+.intro {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: var(--grid-spec-wide);
+}
+
+.introContent {
+  grid-column: var(--center-column);
+}
+
+/* Projects section spans full width */
+.projects {
+  grid-column: 1 / -1;
 }
 
 /* ===================
-   HERO SECTION
-   Name + bio paragraphs
+   INTRO SECTION
+   Large typographic statement
    =================== */
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  max-width: var(--content-width);
+.intro {
+  margin-bottom: var(--sp-xl);
 }
 
-.name {
+.introText {
   font-family: var(--font-sans);
-  font-size: var(--text-base);
-  font-weight: var(--weight-medium);
-  line-height: var(--leading-base);
+  font-size: var(--font-size-intro);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
   color: var(--text-color);
 }
 
+.introText strong {
+  font-weight: 400;
+}
+
+/* Intro links get the distinctive pink/red underline */
+.introText a {
+  text-decoration-color: var(--site-color);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.introText a:hover {
+  text-decoration-color: var(--text-color);
+}
+
 /* ===================
-   GRID SECTION
-   Building / Projects / Writing columns
+   SECTION TITLES
+   System font, smaller size
    =================== */
 
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-6);
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  min-width: 160px;
-  flex: 1;
-}
-
-.sectionLabel {
+.sectionTitle {
   font-family: var(--font-sans);
-  font-size: var(--text-small);
-  font-weight: var(--weight-normal);
-  line-height: var(--leading-small);
-  color: var(--text-secondary);
-  margin-bottom: var(--space-2);
-}
-
-.items {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.itemTitle {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-.itemDescription {
-  font-size: var(--text-small);
-  line-height: var(--leading-small);
-  color: var(--text-secondary);
-}
-
-.externalIcon {
-  color: var(--text-secondary);
-  flex-shrink: 0;
+  font-size: var(--font-size-h2);
+  font-weight: 400;
+  line-height: var(--leading-base);
+  color: var(--text-color);
+  margin-bottom: var(--sp-l);
 }
 
 /* ===================
-   NOW SECTION
-   Current interests / about
+   PROJECTS SECTION
+   Horizontal scrolling cards (like daneden.me)
    =================== */
 
-.now {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  max-width: var(--content-width);
+.projects {
+  margin-bottom: var(--sp-xl);
+  /* Override grid column set in main > * */
 }
 
-.now .sectionLabel {
-  margin-bottom: 0;
+.projectsInner {
+  padding: 0 var(--page-padding);
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-m);
+  padding: 0 var(--page-padding);
+  /* Only show scrollbar when content overflows */
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome/Safari/Edge */
+.projectGrid::-webkit-scrollbar {
+  display: none;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  min-width: 200px; /* Minimum card width before scrolling kicks in */
+  scroll-snap-align: start;
+}
+
+.projectName {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-h2);
+  font-weight: 400;
+  line-height: var(--leading-base);
+  color: var(--text-color);
+  margin-top: var(--sp-s);
+}
+
+.projectDescription {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--leading-base);
+  color: var(--meta-color);
+  max-width: 280px;
+}
+
+.projectImage {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: var(--sp-xs);
+}
+
+.imagePlaceholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(
+    145deg,
+    var(--gray05) 0%,
+    var(--gray10) 100%
+  );
+  border-radius: 12px;
+}
+
+.projectLink {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  text-decoration: underline;
+  text-decoration-color: var(--gray20);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--transition-fast) var(--ease-out);
+}
+
+.projectLink:hover {
+  text-decoration-color: var(--site-color);
 }
 
 /* ===================
-   CONNECT SECTION
-   Contact information
+   TIMELINE SECTION
+   Chronological table
    =================== */
 
-.connect {
+.timeline {
+  margin-top: var(--sp-xl);
+}
+
+.timelineTable {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--leading-relaxed);
+}
+
+.year {
+  width: 80px;
+  padding: var(--sp-xxs) var(--sp-xs);
+  color: var(--meta-color);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-meta);
+  vertical-align: baseline;
+}
+
+.entry {
+  padding: var(--sp-xxs) var(--sp-xs);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  max-width: var(--content-width);
+  gap: var(--sp-xxs);
 }
 
-.connect .sectionLabel {
-  margin-bottom: 0;
+.entry a {
+  color: var(--text-color);
+  text-decoration: underline;
+  text-decoration-color: var(--gray20);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
-/* ===================
-   FOOTER
-   =================== */
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-4) var(--body-margin);
-  border-top: 1px solid var(--border-color);
-  font-size: var(--text-small);
-  line-height: var(--leading-small);
-  color: var(--text-secondary);
+.entry a:hover {
+  text-decoration-color: var(--site-color);
 }
 
-.footerQuote {
-  /* Inherit styles from footer */
-}
-
-.footerYear {
-  /* Inherit styles from footer */
+.entryType {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-meta);
+  color: var(--meta-color);
+  line-height: 1.4;
 }
 
 /* ===================
    RESPONSIVE DESIGN
-   Mobile-first approach
-   
-   Key breakpoint: ~768px
-   - Reduces vertical padding
-   - Grid naturally wraps due to flex-wrap
+   Adjustments for narrower screens
    =================== */
 
-@media (max-width: 768px) {
-  .main {
-    padding: var(--space-8) var(--body-margin);
-  }
-
-  .article {
-    gap: var(--space-6);
-  }
-
-  .grid {
-    gap: var(--space-5);
-  }
-
-  .column {
-    /* On mobile, columns take more width before wrapping */
-    min-width: 140px;
+@media (max-width: 1000px) {
+  /* Switch to 2-column grid when viewport is narrower */
+  .projectGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* 
- * Small mobile adjustments
- * Below 480px, further reduce spacing
- */
+@media (max-width: 800px) {
+  .main {
+    padding: var(--sp-xxl) 0;
+    gap: var(--sp-xl);
+  }
+  
+  .introText {
+    font-size: 2.5rem; /* 40px on mobile */
+    letter-spacing: -0.01em;
+  }
+  
+  .year {
+    width: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Switch to horizontal scroll on mobile */
+  .projectGrid {
+    grid-template-columns: none;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  
+  .projectCard {
+    flex: 0 0 75vw;
+    max-width: 280px;
+  }
+}
+
 @media (max-width: 480px) {
   .main {
-    padding: var(--space-6) var(--body-margin);
+    padding: var(--sp-xl) 0;
+    gap: var(--sp-l);
   }
-
-  .grid {
-    /* Stack columns vertically on very small screens */
-    flex-direction: column;
-    gap: var(--space-5);
+  
+  .introText {
+    font-size: 1.75rem; /* 28px on small mobile */
   }
-
-  .column {
-    min-width: 100%;
+  
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+  
+  .timelineTable {
+    font-size: var(--font-size-base);
+  }
+  
+  .year {
+    width: 50px;
+    font-size: 0.75rem;
+  }
+  
+  .entry {
+    padding: var(--sp-xxs) 0;
   }
 }
